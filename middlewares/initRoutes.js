@@ -3,7 +3,7 @@ const path = require('path');
 
 const initRoutes = app => {
   app.use(`/test`, (req, res) => {
-    res.sendFile(path.join(__dirname, './index.html'));
+    res.send('hello world');
   });
 
   app.use(`/api`, api);

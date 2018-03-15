@@ -3,7 +3,6 @@ const initLogger = require('./initLogger');
 const initParsers = require('./initParsers');
 const initRoutes = require('./initRoutes');
 const allowCORS = require('./allowCORS');
-const initReload = require('./initReload');
 
 module.exports = {
   initErrorHandler,
@@ -11,5 +10,4 @@ module.exports = {
   initParsers,
   initRoutes,
   allowCORS,
-  initReload
 };

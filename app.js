@@ -8,7 +8,6 @@ const {
   initParsers,
   initRoutes,
   allowCORS,
-  initReload
 } = require('./middlewares/index');
 
 initLogger(app);
@@ -16,6 +15,5 @@ initParsers(app);
 allowCORS(app);
 initRoutes(app);
 initErrorHandler(app);
-// initReload(app);
 
 module.exports = app;

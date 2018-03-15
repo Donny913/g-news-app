@@ -7,7 +7,6 @@
 var app = require('../app');
 var http = require('http');
 const config = require('../config/config');
-const reload = require('reload');
 
 /**
  * Get port from environment and store in Express.
@@ -25,11 +24,6 @@ var server = http.createServer(app);
 /**
  * Listen on provided port, on all network interfaces.
  */
-
-if (process.env.NODE_ENV) {
-  console.log('dd');
-  reload(app);
-}
 
 server.listen(port);
 server.on('error', onError);
