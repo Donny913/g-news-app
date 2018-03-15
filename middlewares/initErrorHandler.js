@@ -11,6 +11,7 @@ const initErrorHandler = app => {
     res.locals.error = req.app.get('env') === 'development' ? err : {};
 
     res.status(err.status || 500);
+    console.log(err);
     res.send('Houston we have a problem...');
   });
 };
