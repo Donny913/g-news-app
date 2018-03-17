@@ -5,7 +5,7 @@ const parseXml = require('../../utils/xmlUtils').parseXml;
 
 const urls = {
   politics: 'https://news.yandex.ru/politics.rss',
-  sport: 'https://news.yandex.ru/port.rss',
+  sport: 'https://news.yandex.ru/sport.rss',
   crime: 'https://news.yandex.ru/incident.rss'
 };
 
