@@ -59,11 +59,8 @@ router.get('/get_audio', async (req, res) => {
   let result;
 
   try {
-    pathName = await textToAudio(text);
-    result = {
-      type: 'succes',
-      path: pathName
-    };
+    fileName = await getNewsAudioSrc(text);
+    result = { type: 'success', fileName };
   } catch (error) {
     result = {
       type: 'error',

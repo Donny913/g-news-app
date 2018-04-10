@@ -35,11 +35,12 @@ const textToAudio = text => {
       return response.data;
     })
     .then(data => {
-      const pathName = path.join(__dirname, '../audioStore', `${uniqid()}.wav`);
+      const fileName = `${uniqid()}.wav`;
+      const pathName = path.join(__dirname, '../audioStore', `${fileName}`);
       const file = fs.createWriteStream(pathName);
       file.write(data);
       file.end();
-      return pathName;
+      return fileName;
     });
 };
 
