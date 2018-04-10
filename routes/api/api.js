@@ -50,6 +50,7 @@ router.get('/get_news', async (req, res) => {
     default:
       break;
   }
+  sendResponse(result, res);
 });
 
 router.get('/get_audio', async (req, res) => {
