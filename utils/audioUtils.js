@@ -15,9 +15,9 @@ const parseURL = (path, text) => {
   Object.keys(config).forEach(attr => {
     path += attr + '=' + config[attr] + '&';
   });
+  text = text.replace(/&(lt|gt|quot);/g, ' ');
   path += 'q=' + encodeURIComponent(text) + '&';
   path += 'textLen=' + text.length;
-  console.log(path);
   return path;
 };
 
@@ -31,6 +31,9 @@ const textToAudio = text => {
     method: 'GET',
     responseType: 'arraybuffer'
   })
+    .catch(err => {
+      console.error(`sggogle api error ${err}`);
+    })
     .then(response => {
       return response.data;
     })
