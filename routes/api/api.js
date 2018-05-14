@@ -1,7 +1,8 @@
 const router = require('express').Router();
 
-const httpsGet = require('../../utils/httpUtils').httpsGet;
+const axios = require('../../utils/httpUtils');
 const parseXml = require('../../utils/xmlUtils').parseXml;
+const getNewsAudioSrc = require('../../utils/audioUtils').getNewsAudioSrc;
 
 const urls = {
   politics: 'https://news.yandex.ru/politics.rss',
@@ -9,22 +10,28 @@ const urls = {
   crime: 'https://news.yandex.ru/incident.rss'
 };
 
+const sendResponse = (result, res) => {
+  if (result.type === 'success') {
+    res.status(200).json(result);
+  } else {
+    res.status(result.status || 500).json(result);
+  }
+};
+
 const getNews = async topic => {
   try {
-    const xmlData = await httpsGet(urls[topic]);
-    const jsData = await parseXml(xmlData);
+    const xml = await axios.get(urls[topic]);
+    const jsData = await parseXml(xml.data);
     return {
       type: 'success',
-      data: {
-        news: jsData.rss.channel[0].item
-      }
-    }
+      news: jsData.rss.channel[0].item
+    };
   } catch (error) {
     return {
       type: 'error',
       message: error.message,
-      httpStatus: error.httpStatus,
-    }
+      status: error.httpStatus
+    };
   }
 };
 
@@ -43,10 +50,26 @@ router.get('/get_news', async (req, res) => {
     default:
       break;
   }
-  if (result.type === 'success') {
-    res.status(200).json(result.data);
+  sendResponse(result, res);
+});
+
+router.get('/get_audio', async (req, res) => {
+  const text = req.query.text;
+
+  let result;
+
+  try {
+    fileName = await getNewsAudioSrc(text);
+    result = { type: 'success', fileName };
+  } catch (error) {
+    result = {
+      type: 'error',
+      message: error.message,
+      status: error.status
+    };
   }
-  res.status(result.httpStatus || 500).json({ error: result.message || 'error in api handler' });
+
+  sendResponse(result, res);
 });
 
 module.exports = router;

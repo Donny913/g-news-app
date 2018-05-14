@@ -1,29 +1,16 @@
-const https = require('https');
+const axios = require('axios');
 
-const httpsGet = url => {
-  return new Promise((resolve, reject) => {
-    https.get(url, resp => {
-      const statusCode = resp.statusCode;
-
-      if (statusCode !== 200) {
-        const err = new Error(`Request failed, status code - ${statusCode}`);
-        err.httpStatus = statusCode;
-        reject(err);
-      }
-
-      let resultString = '';
-      resp.on('data', data => {
-        resultString += data;
-      });
-      resp.on('end', () => {
-        resolve(resultString);
-      });
-    }).on('error', err => {
-      reject(err);
+const get = url => {
+  return axios
+    .get(url)
+    .then(data => {
+      return data;
+    })
+    .catch(err => {
+      console.error(err);
     });
-  });
-}
+};
 
 module.exports = {
-  httpsGet
+  get
 };
