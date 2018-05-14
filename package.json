@@ -5,7 +5,11 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production node ./bin/www",
     "dev": "cross-env NODE_ENV=development supervisor ./bin/www",
-    "debug": "cross-env NODE_ENV=development supervisor --inspect ./bin/www"
+    "debug": "cross-env NODE_ENV=development supervisor --inspect ./bin/www",
+    "test": "jest"
+  },
+  "jest": {
+    "roots": ["<rootDir>/tests"]
   },
   "dependencies": {
     "body-parser": "~1.18.2",
@@ -14,6 +18,7 @@
     "xml2js": "^0.4.19"
   },
   "devDependencies": {
-    "cross-env": "^5.1.4"
+    "cross-env": "^5.1.4",
+    "jest": "^22.4.3"
   }
 }

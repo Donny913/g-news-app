@@ -15,7 +15,9 @@ const getNews = async topic => {
     const jsData = await parseXml(xmlData);
     return {
       type: 'success',
-      data: jsData.rss.channel[0].item
+      data: {
+        news: jsData.rss.channel[0].item
+      }
     }
   } catch (error) {
     return {
