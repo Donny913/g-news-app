@@ -1,4 +1,4 @@
-const api = require('../routes/api/api');
+const api = require('../routes/api/api').router;
 
 // TODO remove after testing
 

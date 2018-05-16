@@ -1,11 +1,10 @@
+const modulas = require('./module');
+// modulas.hello = jest.fn(() => 'Shalom');
+
 jest.mock('./hello', () => {
-  return {
-    hello: () => 'Shalom'
-  };
+  return jest.fn(() => 'Shalom');
 });
 
-const foo = require('./foo');
-
 test('testing inside function', () => {
-  expect(foo('Moses')).toBe('Shalom, Moses');
+  expect(modulas.foo('Moses')).toBe('Shalom, Moses');
 });

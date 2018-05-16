@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const axios = require('../../utils/httpUtils');
+const httpUtils = require('../../utils/httpUtils');
 const parseXml = require('../../utils/xmlUtils').parseXml;
 const getNewsAudioSrc = require('../../utils/audioUtils').getNewsAudioSrc;
 
@@ -20,7 +20,7 @@ const sendResponse = (result, res) => {
 
 const getNews = async topic => {
   try {
-    const xml = await axios.get(urls[topic]);
+    const xml = await httpUtils.get(urls[topic]);
     const jsData = await parseXml(xml.data);
     return {
       type: 'success',
@@ -72,4 +72,4 @@ router.get('/get_audio', async (req, res) => {
   sendResponse(result, res);
 });
 
-module.exports = router;
+module.exports = { router, getNews, sendResponse };
